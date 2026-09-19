@@ -355,6 +355,10 @@ jobs:
             PrevizRender-${{ matrix.label }}.dmg
             PrevizRender-Windows-x64-Setup.exe
           if-no-files-found: ignore
+          # Artifacts bill as storage per GB-day (~150 MB per build). Releases
+          # keep their own copies, so these only need to outlive the release
+          # job and a quick test download.
+          retention-days: 3
 
   # Publish the Release as soon as the macOS-arm64 + Windows builds are ready.
   # Triggered by a v* tag push, OR manually via "Run workflow" with
